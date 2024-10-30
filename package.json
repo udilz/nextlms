@@ -12,7 +12,10 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@prisma/client": "^5.21.1",
     "next": "15.0.0-canary.67",
+    "nextlms": "link:",
+    "prisma": "^5.21.1",
     "react": "19.0.0-rc.0",
     "react-dom": "19.0.0-rc.0",
     "tailwind-merge": "^2.4.0",
