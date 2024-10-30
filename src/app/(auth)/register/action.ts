@@ -1,4 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 "use server";
+import bcrypt from "bcrypt";
 import z from "zod";
 
 import { UserServices } from "@/services/user.services";
@@ -34,7 +38,8 @@ export async function registerAction(prevData: unknown, formData: FormData) {
 
   // input > db
   try {
-    await UserServices.createUser({ name, email, password });
+    const hashPassword = await bcrypt.hash(password, 13);
+    await UserServices.createUser({ name, email, password : hashPassword });
     return {
       status: "success",
       message: "Register success",
