@@ -5,6 +5,8 @@
 import bcrypt from "bcrypt";
 import z from "zod";
 
+import { genereateVerificationCode } from "@/libs/generate-verification-code";
+import { EmailServices } from "@/services/email.services";
 import { UserServices } from "@/services/user.services";
 
 const registerSchema = z.object({
@@ -39,7 +41,11 @@ export async function registerAction(prevData: unknown, formData: FormData) {
   // input > db
   try {
     const hashPassword = await bcrypt.hash(password, 13);
-    await UserServices.createUser({ name, email, password : hashPassword });
+    const user =  await UserServices.createUser({ name, email, password : hashPassword });
+    const verificationCode = genereateVerificationCode();
+    await UserServices.createVerificationCode(user.id, verificationCode);
+    await EmailServices.sendVerificationCode(user.id, verificationCode);
+   
     return {
       status: "success",
       message: "Register success",

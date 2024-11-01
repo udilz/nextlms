@@ -17,9 +17,9 @@ export default function Page() {
         <p>Create an account to get started</p>
       </section>
       <form action={formAction} className="space-y-2">
-        <Input name="name" placeholder="Name" defaultValue={state?.data?.name as string}/>
-        <Input name="email" placeholder="Email" defaultValue={state?.data?.email as string}/>
-        <Input name="password" placeholder="Password" type="password" defaultValue={state?.data?.password as string}/>
+        <Input name="name" placeholder="Name" defaultValue={state?.data?.name}/>
+        <Input name="email" placeholder="Email" defaultValue={state?.data?.email}/>
+        <Input name="password" placeholder="Password" type="password" defaultValue={state?.data?.password}/>
         <Button disabled={pending}>Register</Button>
         {state?.status === "error" && state.errors?.name  ? <div className="msg msg-error">{state.errors.name}</div> : null}
         {state?.status === "error" && state.errors?.email ? <div className="msg msg-error">{state.errors.email}</div> : null}
