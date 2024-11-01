@@ -1,6 +1,9 @@
 "use server";
 
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import z from "zod";
 
 import { UserServices } from "@/services/user.services";
@@ -65,4 +68,17 @@ export async function loginAction(prevState: unknown, formData: FormData) {
   }
 
   // JWT TOKEN
+  const payload = {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    role: user.role,
+    avatarUrl: user.avatarUrl,
+  };
+  const jwtToken = jwt.sign(payload, process.env.JWT_SECRET);
+  cookies().set("token", jwtToken, {
+    httpOnly: true,
+    path: "/",
+  });
+  redirect("/my-courses");
 }
