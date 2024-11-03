@@ -9,10 +9,7 @@
     "next/typescript",
     "plugin:storybook/recommended"
   ],
-  "plugins": [
-    "simple-import-sort",
-    "import"
-  ],
+  "plugins": ["simple-import-sort", "import"],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
@@ -21,6 +18,19 @@
     "simple-import-sort/exports": "error",
     "import/first": "error",
     "import/newline-after-import": "error",
-    "import/no-duplicates": "error"
+    "import/no-duplicates": "error",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
+      }
+    ],
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      {
+        "checksVoidReturn": false
+      }
+    ]
   }
 }
