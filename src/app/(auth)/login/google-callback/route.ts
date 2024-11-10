@@ -1,3 +1,4 @@
+import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { NextRequest } from "next/server";
@@ -5,7 +6,6 @@ import { z } from "zod";
 
 import { UserServices } from "@/services/user.services";
 import { google } from "@/utils/arctic";
-import jwt from "jsonwebtoken";
 
 const codeSchema = z.object({
   code: z.string().min(1),
