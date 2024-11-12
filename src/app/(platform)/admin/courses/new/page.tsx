@@ -1,15 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useActionState, useState } from "react";
 
 import { Button } from "@/components/button";
 import { FileInput } from "@/components/file-input";
 import { Input } from "@/components/input";
 import { Textarea } from "@/components/textarea";
 
+import { createCourseAction } from "./action";
+
 export default function Page() {
   const [preview, setPreview] = useState("");
+  const [state, formAction, pending] = useActionState(createCourseAction, null);
 
   function handleCreatePreview(event: ChangeEvent<HTMLInputElement>) {
     if (!event.target.files) return;
@@ -23,13 +26,17 @@ export default function Page() {
         <h3>Create new courses</h3>
       </section>
       <section>
-        <form className="space-y-2">
+        <form action={formAction} className="space-y-2">
           {preview ? <Image src={preview} width={800} height={300} alt="Course cover" className="rounded-lg" /> : null}
           <FileInput name="coverImage" placeholder="Choose the course cover" onChange={handleCreatePreview} />
-          <Input name="title" placeholder="Course title" />
-          <Textarea name="description" placeholder="Course description" />
-          <Input name="price" placeholder="Course prices" />
-          <Button>Save Draft</Button>
+          <Input name="title" placeholder="Course title" defaultValue={state?.data?.title} />
+          <Textarea name="description" placeholder="Course description" defaultValue={state?.data?.description}/>
+          <Input name="price" placeholder="Course prices"  />
+          <Button disabled={pending}>Save Draft</Button>
+          {state?.status === "error" && state.errors?.title ? <div className="msg msg-error">{state.errors.title}</div> : null}
+          {state?.status === "error" && state.errors?.description ? <div className="msg msg-error">{state.errors.description}</div> : null}
+          {state?.status === "error" && state.errors?.price ? <div className="msg msg-error">{state.errors.price}</div> : null}
+          {state?.status === "error" && state.message !== "" ? <div className="msg msg-error">{state.message}</div> : null}
         </form>
       </section>
     </main>
