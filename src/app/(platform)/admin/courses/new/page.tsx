@@ -28,7 +28,7 @@ export default function Page() {
       <section>
         <form action={formAction} className="space-y-2">
           {preview ? <Image src={preview} width={800} height={300} alt="Course cover" className="rounded-lg" /> : null}
-          <FileInput name="coverImage" placeholder="Choose the course cover" onChange={handleCreatePreview} />
+          <FileInput name="coverImage" placeholder="Choose the course cover" onChange={handleCreatePreview}  />
           <Input name="title" placeholder="Course title" defaultValue={state?.data?.title} />
           <Textarea name="description" placeholder="Course description" defaultValue={state?.data?.description}/>
           <Input name="price" placeholder="Course prices"  />
