@@ -11,11 +11,11 @@ export default function Page() {
       </section>
       <section>
         <form className="space-y-2">
-          <Input name="nama" placeholder="Nama" />
-          <Input name="nik" placeholder="NIK" />
-          <Input name="tanggal_lahir" placeholder="Tanggal Lahir" />
-          <Input name="status" placeholder="Status Perkawinan" />
-          <Input name="data_pasangan" placeholder="Data Pasangan" />
+          <Input name="dealer" placeholder="Dealer" />
+          <Input name="merk" placeholder="Merk Kendaraan" />
+          <Input name="tipe" placeholder="Tipe Kendaraan" />
+          <Input name="warna" placeholder="Warna Kendaraan" />
+          <Input name="harga" placeholder="Harga Kendaraan" />
           <Button>Save Draft</Button>
         </form>
       </section>
