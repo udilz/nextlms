@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    font-size: 15px;
+  }
+  body {
+    @apply font-medium tracking-tight;
+  }
+  h1 {
+    @apply text-8xl font-semibold tracking-tighter;
+  }
+  h2 {
+    @apply text-4xl font-medium tracking-tighter;
+  }
+  h3 {
+    @apply text-2xl font-medium tracking-tight;
+  }
+  h4 {
+    @apply text-xl font-medium tracking-tight;
+  }
+  h5 {
+    @apply text-lg font-medium;
+  }
+  h6 {
+    @apply text-balance font-medium;
+  }
+}
+
+@layer components {
+  .msg {
+    @apply bg-slate-50 text-slate-500 px-3 py-2 rounded-lg text-sm font-medium text-center
+  }
+  .msg-error {
+    @apply bg-rose-100 text-rose-600
+  }
+  .msg-success {
+    @apply bg-emerald-100 text-emerald-600
+  }
+}
