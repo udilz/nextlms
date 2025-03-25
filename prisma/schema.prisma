@@ -40,3 +40,34 @@ model VerificationCode {
   user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
 }
+
+model Course {
+  id          String    @id @default(cuid())
+  title       String
+  slug        String
+  description String
+  price       Int
+  coverImage  String
+  isPublished Boolean   @default(false)
+  Section     Section[]
+}
+
+model Section {
+  id       String   @id @default(cuid())
+  title    String
+  index    Int      @default(0)
+  courseId String
+  course   Course   @relation(fields: [courseId], references: [id])
+  Lesson   Lesson[]
+}
+
+model Lesson {
+  id        String  @id @default(cuid())
+  title     String
+  slug      String
+  videUrl   String
+  index     Int     @default(0)
+  isPreview Boolean @default(false)
+  sectionId String
+  section   Section @relation(fields: [sectionId], references: [id])
+}

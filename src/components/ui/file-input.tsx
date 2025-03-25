@@ -12,25 +12,28 @@ const style = tv({
 });
 
 type TFileInput = VariantProps<typeof style>;
-interface IFileInput extends TFileInput, React.ComponentPropsWithRef<"input"> {}
+interface Props extends TFileInput, React.ComponentPropsWithRef<"input"> {}
 
-export const FileInput = (props: IFileInput) => {
+export const FileInput = (props: Props) => {
   const [files, setFiles] = useState<FileList | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
   return (
     <div className={style.slots.base}>
       <button type="button" className={style.slots.button} onClick={() => inputRef.current?.click()}>
         Choose File
       </button>
       <input
+        {...props}
         ref={inputRef}
         hidden
+        type="file"
         onChange={(e) => {
           setFiles(e.target.files);
           props.onChange?.(e);
         }}
       />
-      {files ? <div>You Choose {files.length} file</div> : <div>{props.placeholder}</div>}
+      {files ? <div>You choose {files.length} file</div> : <div>{props.placeholder}</div>}
     </div>
   );
 };
